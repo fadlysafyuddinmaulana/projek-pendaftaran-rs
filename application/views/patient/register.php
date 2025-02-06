@@ -20,66 +20,68 @@
                                 <?php echo $this->session->flashdata('error'); ?>
                             </div>
                         <?php endif; ?>
+                        <form method="post" action="<?= base_url() ?>tambah-pasien" enctype="multipart/form-data">
 
-                        <?php echo form_open('patient/verify', ['class' => 'needs-validation']); ?>
-                        <div class="mb-3">
-                            <label for="nik" class="form-label">NIK (National ID)*</label>
-                            <input type="text" class="form-control <?php echo form_error('nik') ? 'is-invalid' : ''; ?>"
-                                id="nik" name="nik" value="<?php echo set_value('nik'); ?>">
-                            <?php echo form_error('nik', '<div class="invalid-feedback">', '</div>'); ?>
-                        </div>
+                            <div class="mb-3">
+                                <label for="nik" class="form-label">NIK</label>
+                                <input type="text" class="form-control" id="nik" name="nik">
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="full_name" class="form-label">Full Name*</label>
-                            <input type="text" class="form-control <?php echo form_error('full_name') ? 'is-invalid' : ''; ?>"
-                                id="full_name" name="full_name" value="<?php echo set_value('full_name'); ?>">
-                            <?php echo form_error('full_name', '<div class="invalid-feedback">', '</div>'); ?>
-                        </div>
+                            <div class="mb-3">
+                                <label for="full_name" class="form-label">Nama Depan*</label>
+                                <input type="text" class="form-control" id="nama_depan" name="nama_depan">
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="date_of_birth" class="form-label">Date of Birth*</label>
-                            <input type="date" class="form-control <?php echo form_error('date_of_birth') ? 'is-invalid' : ''; ?>"
-                                id="date_of_birth" name="date_of_birth" value="<?php echo set_value('date_of_birth'); ?>">
-                            <?php echo form_error('date_of_birth', '<div class="invalid-feedback">', '</div>'); ?>
-                        </div>
+                            <div class="mb-3">
+                                <label for="full_name" class="form-label">Nama Belakang</label>
+                                <input type="text" class="form-control" id="nama_terakhir" name="nama_terakhir">
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="gender" class="form-label">Gender*</label>
-                            <select class="form-select <?php echo form_error('gender') ? 'is-invalid' : ''; ?>"
-                                id="gender" name="gender">
-                                <option value="">Select Gender</option>
-                                <option value="M" <?php echo set_select('gender', 'M'); ?>>Male</option>
-                                <option value="F" <?php echo set_select('gender', 'F'); ?>>Female</option>
-                            </select>
-                            <?php echo form_error('gender', '<div class="invalid-feedback">', '</div>'); ?>
-                        </div>
+                            <div class="mb-3">
+                                <label for="date_of_birth" class="form-label">Kota Asal</label>
+                                <input type="text" class="form-control" id="kota_asal" name="kota_asal">
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Address*</label>
-                            <textarea class="form-control <?php echo form_error('address') ? 'is-invalid' : ''; ?>"
-                                id="address" name="address" rows="3"><?php echo set_value('address'); ?></textarea>
-                            <?php echo form_error('address', '<div class="invalid-feedback">', '</div>'); ?>
-                        </div>
+                            <div class="mb-3">
+                                <label for="date_of_birth" class="form-label">Tanggal Lahir</label>
+                                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir">
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="phone_number" class="form-label">Phone Number*</label>
-                            <input type="text" class="form-control <?php echo form_error('phone_number') ? 'is-invalid' : ''; ?>"
-                                id="phone_number" name="phone_number" value="<?php echo set_value('phone_number'); ?>">
-                            <?php echo form_error('phone_number', '<div class="invalid-feedback">', '</div>'); ?>
-                        </div>
+                            <div class="mb-3">
+                                <label for="no_tel" class="form-label">Nomor Telepon</label>
+                                <input type="text" class="form-control" id="no_tel" name="no_tel">
+                            </div>
 
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control <?php echo form_error('email') ? 'is-invalid' : ''; ?>"
-                                id="email" name="email" value="<?php echo set_value('email'); ?>">
-                            <?php echo form_error('email', '<div class="invalid-feedback">', '</div>'); ?>
-                        </div>
+                            <div class="mb-3">
+                                <label for="alamat" class="form-label">Alamat</label>
+                                <textarea class="form-control" id="alamat" name="alamat" rows="3"></textarea>
+                            </div>
 
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">Register & Get Queue Number</button>
-                            <a href="<?php echo site_url('queue'); ?>" class="btn btn-secondary">Cancel</a>
-                        </div>
-                        <?php echo form_close(); ?>
+                            <div class="mb-3">
+                                <label for="gender" class="form-label">Jenis Kelamin</label>
+                                <select class="form-select" id="jk" name="jk">
+                                    <option value="">Select Gender</option>
+                                    <option value="L">Male</option>
+                                    <option value="P">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="gender" class="form-label">Golongan Darah</label>
+                                <select class="form-select" id="goldar" name="goldar">
+                                    <option value="-">-</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="AB">AB</option>
+                                    <option value="O">O</option>
+                                </select>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Register & Get Queue Number</button>
+                                <a href="<?php echo site_url('queue'); ?>" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
