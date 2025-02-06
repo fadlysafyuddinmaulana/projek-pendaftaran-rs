@@ -44,9 +44,9 @@ class M_Queue extends CI_Model
     {
         $query = $this->db->query(
             "
-            SELECT q.*, p.full_name, p.patient_number 
+            SELECT q.*, p.nama_pasien, p.patient_number 
             FROM queues q
-            JOIN patients p ON p.id = q.patient_id
+            JOIN tb_pasien p ON p.id_pasien = q.patient_id
             WHERE q.queue_date = CURRENT_DATE
             AND q.status IN ('waiting', 'in_progress')
             ORDER BY q.created_at ASC"

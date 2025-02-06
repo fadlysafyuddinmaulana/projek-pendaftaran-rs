@@ -31,7 +31,7 @@ class Queue extends CI_Controller
             'patient_number'        => $patient_number,
             'full_name'             => $full_name,
             'date_of_birth'         => $date_of_birth,
-            'phone_number'        => $phone_number
+            'phone_number'          => $phone_number
         );
 
         $this->M_SQL->insert_data($data, 'patients');
