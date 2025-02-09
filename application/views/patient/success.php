@@ -18,34 +18,13 @@
                         <div class="text-center mb-4">
                             <h4>Patient Information</h4>
                             <div class="mb-3">
-                                <?php
-                                // Debug: Print all available data
-                                var_dump($patient_data);
-
-                                // Debug: Check file path
-                                if (isset($patient_data['barcode'])) {
-                                    $full_path = FCPATH . $patient_data['barcode'];
-                                    echo "Checking file: " . $full_path . "<br>";
-                                    echo "File exists: " . (file_exists($full_path) ? 'Yes' : 'No') . "<br>";
-                                }
-                                ?>
-
                                 <?php if (isset($patient_data) && isset($patient_data['barcode']) && file_exists(FCPATH . $patient_data['barcode'])): ?>
                                     <img src="<?php echo base_url($patient_data['barcode']); ?>"
                                         alt="Patient QR Code"
                                         class="img-fluid"
                                         style="max-width: 200px;">
                                 <?php else: ?>
-                                    <div class="alert alert-warning">
-                                        QR Code not available
-                                        <?php
-                                        // Debug: Show why it's not available
-                                        if (!isset($patient_data)) echo "- patient_data not set<br>";
-                                        if (!isset($patient_data['barcode'])) echo "- barcode not set<br>";
-                                        if (isset($patient_data['barcode']) && !file_exists(FCPATH . $patient_data['barcode']))
-                                            echo "- file does not exist: " . FCPATH . $patient_data['barcode'];
-                                        ?>
-                                    </div>
+                                    <div class="alert alert-warning">QR Code not available</div>
                                 <?php endif; ?>
                             </div>
 
