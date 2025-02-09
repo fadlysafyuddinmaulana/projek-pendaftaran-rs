@@ -49,7 +49,13 @@
                                 <?php endif; ?>
                             </div>
 
+                            <div class="alert alert-info">
+                                <h5>Your Queue Number</h5>
+                                <h2 class="mb-0"><?php echo $patient_data['queue_number']; ?></h2>
+                            </div>
+
                             <div class="patient-details">
+                                <p><strong>No. Pasien:</strong> <?php echo $patient_data['patient_number']; ?></p>
                                 <p><strong>NIK:</strong> <?php echo $patient_data['nik']; ?></p>
                                 <p><strong>Nama:</strong> <?php echo $patient_data['nama_pasien']; ?></p>
                                 <p><strong>TTL:</strong> <?php echo $patient_data['ttl']; ?></p>
@@ -62,6 +68,9 @@
                                 class="btn btn-secondary">
                                 Register Another Patient
                             </a>
+                            <button onclick="window.print()" class="btn btn-primary">
+                                Print Information
+                            </button>
                         </div>
                     </div>
                 </div>
