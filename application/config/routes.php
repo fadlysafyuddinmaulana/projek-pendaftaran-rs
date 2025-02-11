@@ -49,8 +49,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'pasien/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['tambah-pasien']     = 'pasien/create_patient';
+$route['pasien-baru']        = 'pasien/register';
+$route['kontrol-pasien']     = 'pasien/form_kontrol';
+
+$route['success-pasien']     = 'pasien/success';
+
+$route['process-kontrol']     = 'pasien/create_control_patient';

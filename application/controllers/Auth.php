@@ -5,7 +5,7 @@ class Auth extends CI_Controller
 {
     public function auth_user()
     {
-        $u = $this->input->post('nik');
+        $u = $this->input->post('patient_number');
         $cek = $this->M_Auth->cek_user($u);
 
         if ($cek->num_rows() > 0) {
@@ -19,11 +19,19 @@ class Auth extends CI_Controller
             $session['no_telepon']      = $user_data['no_telepon'];
             $session['alamat']          = $user_data['alamat'];
             $session['jk']              = $user_data['jk'];
+            $session['goldar']          = $user_data['goldar'];
+            $session['barcode']         = $user_data['barcode'];
             $this->session->set_userdata('server_rs', $session);
 
             redirect('dashboard');
         } else {
             # code...;
         }
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('auth');
     }
 }
