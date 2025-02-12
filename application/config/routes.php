@@ -53,9 +53,10 @@ $route['default_controller'] = 'pasien/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['pasien-baru']        = 'pasien/register';
-$route['kontrol-pasien']     = 'pasien/form_kontrol';
+$route['pasien-baru']           = 'pasien/register';
+$route['kontrol-pasien']        = 'pasien/form_kontrol';
 
-$route['success-pasien']     = 'pasien/success';
+$route['success-pasien']        = 'pasien/success';
 
-$route['process-kontrol']     = 'pasien/create_control_patient';
+$route['process-kontrol']       = 'pasien/create_control_patient';
+$route['process-patient']       = 'pasien/create_patient';
