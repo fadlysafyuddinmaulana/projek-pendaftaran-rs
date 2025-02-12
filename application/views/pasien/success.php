@@ -21,13 +21,6 @@
                 </div>
             <?php endif; ?>
         </div>
-        <!-- <script>
-                var qrcode = new QRCode(document.getElementById("qrcode"), {
-                    text: "https://qrco.de/bfk6Rk",
-                    width: 128,
-                    height: 128
-                });
-            </script> -->
 
         <div class="queue-number">
             <h2>Nomor Antrean:</h2>

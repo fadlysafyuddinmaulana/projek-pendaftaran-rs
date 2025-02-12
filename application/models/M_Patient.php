@@ -18,7 +18,7 @@ class M_Patient extends CI_Model
         $data['patient_number'] = $this->generate_patient_number();
 
         // Insert patient data
-        $this->db->insert('tb_kontrol_pasien', $data);
+        $this->db->insert('tb_pasien', $data);
         $patient_id = $this->db->insert_id();
 
         $queue_number = $this->M_Queue->add_to_queue($patient_id);
@@ -44,7 +44,7 @@ class M_Patient extends CI_Model
         $query = $this->db->query(
             "
             SELECT MAX(patient_number) as last_number 
-            FROM tb_kontrol_pasien 
+            FROM tb_pasien 
             WHERE patient_number LIKE ?",
             array($year . $month . '%')
         );

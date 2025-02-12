@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group">
                     <label>No. Whatsapp <span class="required">*</span></label>
-                    <input type="text" name="no_whatssapp" id="no_whatssapp" value="62<?= random_string('numeric', 11) ?>" placeholder="Masukkan nomor Whatsapp" required>
+                    <input type="text" name="no_whatsapp" id="no_whatsapp" value="62<?= random_string('numeric', 11) ?>" placeholder="Masukkan nomor Whatsapp" required>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@
                 </div>
                 <div class="form-group">
                     <label>Status Perkawinan <span class="required">*</span></label>
-                    <select name="status_kawin" id="status_kawin" required>
+                    <select name="status_perkawinan" id="status_perkawinan" required>
                         <option value="">Pilih Status</option>
                         <option value="Belum Menikah">Belum Menikah</option>
                         <option value="Menikah" selected>Menikah</option>
@@ -112,7 +112,7 @@
                 </div>
                 <div class="form-group">
                     <label>Pendidikan<span class="required">*</span></label>
-                    <select name="pendidikkan" id="pendidikkan" required>
+                    <select name="pendidikan" id="pendidikan" required>
                         <option value="">Pilih Pendidikan</option>
                         <option value="SD">SD</option>
                         <option value="SMP" selected>SMP</option>
