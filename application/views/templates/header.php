@@ -7,7 +7,7 @@
     <title>Pendaftaran Pasien</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/web-pendaftaran-rs-online/pages/style.css">
-    <script src="<?= base_url() ?>assets/web-pendaftaran-rs-online/pages/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/AdminLTE-3.2.0/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/AdminLTE-3.2.0/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">

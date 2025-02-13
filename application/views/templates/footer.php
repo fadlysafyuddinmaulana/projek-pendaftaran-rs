@@ -5,8 +5,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="<?= base_url() ?>assets/web-pendaftaran-rs-online/pages/script.js"></script>
 <!-- Select2 -->
 <script src="<?= base_url() ?>assets/AdminLTE-3.2.0/plugins/select2/js/select2.full.min.js"></script>
+
 <script>
     $(document).ready(function() {
         //Initialize Select2 Elements
@@ -40,10 +43,6 @@
                 currentStep--;
                 showStep(currentStep);
             }
-        });
-
-        $(".btn-back").click(function() {
-            window.location.href = "index.html";
         });
 
         showStep(currentStep);
@@ -2246,6 +2245,29 @@
         });
     }
 </script>
+
+<script>
+    function exportToPDF() {
+        const element = document.getElementById('patient-data'); // Target container
+        html2pdf(element, {
+            margin: 10,
+            filename: 'Data_Pasien.pdf',
+            image: {
+                type: 'jpeg',
+                quality: 0.98
+            },
+            html2canvas: {
+                scale: 2
+            },
+            jsPDF: {
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'portrait'
+            }
+        });
+    }
+</script>
+
 </body>
 
 </html>
