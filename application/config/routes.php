@@ -55,8 +55,15 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['pasien-baru']           = 'pasien/register';
 $route['kontrol-pasien']        = 'pasien/form_kontrol';
+$route['form-log-reg']          = 'auth/index';
+$route['dokter']                = 'pasien/data_dokter';
 
 $route['success-pasien']        = 'pasien/success';
+$route['success-checkup']       = 'pasien/success_checkup';
 
-$route['process-kontrol']       = 'pasien/create_control_patient';
+$route['process-kontrol']       = 'pasien/create_checkup';
 $route['process-patient']       = 'pasien/create_patient';
+$route['process-register']      = 'auth/process_register';
+
+$route['auth-user']             = 'auth/auth_user';
+$route['logout-user']           = 'auth/logout';

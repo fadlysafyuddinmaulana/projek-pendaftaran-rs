@@ -5,7 +5,7 @@ class M_Patient extends CI_Model
 
     public function cek_nik($u)
     {
-        $this->db->where('nik', $u);
+        $this->db->where('patient_number', $u);
 
         return $this->db->get('tb_pasien');
     }
@@ -40,13 +40,14 @@ class M_Patient extends CI_Model
     {
         $year = date('Y');
         $month = date('m');
+        $day = date('d');
 
         $query = $this->db->query(
             "
             SELECT MAX(patient_number) as last_number 
             FROM tb_pasien 
             WHERE patient_number LIKE ?",
-            array($year . $month . '%')
+            array($year . $month . $day . '%')
         );
 
         $result = $query->row();
@@ -59,7 +60,7 @@ class M_Patient extends CI_Model
             $sequence = str_pad((intval($sequence) + 1), 4, '0', STR_PAD_LEFT);
         }
 
-        return $year . $month . $sequence;
+        return $year . $month . $day . $sequence;
     }
 
     public function get_patient_by_id($id)

@@ -1,14 +1,40 @@
 <div class="footer">
     &copy; 2025 Rumah Sakit Islam Indonesia. Semua hak dilindungi.
 </div>
-<script src="<?= base_url() ?>assets/web-pendaftaran-rs-online/pages/script.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="<?= base_url() ?>assets/web-pendaftaran-rs-online/pages/script.js"></script>
+<script src="<?= base_url() ?>assets/js/patient_print.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="<?= base_url() ?>assets/web-pendaftaran-rs-online/pages/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Select2 -->
 <script src="<?= base_url() ?>assets/AdminLTE-3.2.0/plugins/select2/js/select2.full.min.js"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            const tabElement = document.getElementById(tabId);
+            const buttonElement = document.querySelector(`button[onclick="showTab('${tabId}')"]`);
+
+            if (tabElement) tabElement.classList.add('active');
+            if (buttonElement) buttonElement.classList.add('active');
+        }
+
+        window.showTab = showTab; // Make the function globally accessible
+
+        let activeTab = 'login';
+
+        // Auto-switch to the Register tab if PHP sets the $active_tab variable
+        <?php if (!empty($active_tab)) { ?>
+            showTab('<?= $active_tab ?>');
+        <?php } ?>
+    });
+</script>
 
 <script>
     $(document).ready(function() {
@@ -2232,7 +2258,6 @@
                 ]
             }
         };
-
         if (data[province].cities.length === 0) {
             citySelect.append(new Option("Other", "other"));
         } else {

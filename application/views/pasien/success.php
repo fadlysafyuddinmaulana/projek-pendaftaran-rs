@@ -30,7 +30,6 @@
                 <p><b>Nomor Pasien:</b> <?= $patient_data['patient_number']; ?></p>
                 <p><b>Nomor Identitas:</b> <?= $patient_data['card_number']; ?></p>
                 <p><b>Nama:</b> <?= $patient_data['nama_pasien']; ?></p>
-                <p><b>TTL:</b> <?= $patient_data['ttl']; ?></p>
             </div>
 
             <!-- Export options -->
@@ -40,13 +39,8 @@
                     <i class="fas fa-file-pdf"></i> Unduh PDF
                 </a>
 
-                <!-- Email PDF -->
-                <a href="<?= base_url() ?>pasien/email_pdf" class="btn-export email">
-                    <i class="fas fa-envelope"></i> Kirim ke Email
-                </a>
-
                 <!-- Print directly -->
-                <a href="javascript:window.print();" class="btn-export print">
+                <a href="#" onclick="printPatientCard(); return false;" class="btn-export print">
                     <i class="fas fa-print"></i> Cetak Langsung
                 </a>
             </div>

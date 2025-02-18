@@ -18,13 +18,25 @@ class Pasien extends CI_Controller
 
     public function index()
     {
+        $user = $this->session->userdata('server_rs');
+
         $data['title'] = 'RSI Purwokerto';
-        $data['file_header'] = 1;
-        $data['file_footer'] = 1;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar', $data);
         $this->load->view('pasien/index', $data);
+        $this->load->view('templates/footer', $data);
+    }
+
+    public function data_dokter()
+    {
+        $user = $this->session->userdata('server_rs');
+
+        $data['title'] = 'RSI Purwokerto';
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('dokter/index', $data);
         $this->load->view('templates/footer', $data);
     }
 
@@ -71,42 +83,29 @@ class Pasien extends CI_Controller
         return $email_username . "@" . $domains[array_rand($domains)];
     }
 
-    public function form_kontrol()
-    {
-        $data['title'] = 'RSI Purwokerto';
-        $data['file_header'] = 1;
-        $data['file_footer'] = 2;
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar', $data);
-        $this->load->view('pasien/form-kontrol', $data);
-        $this->load->view('templates/footer', $data);
-    }
-
     public function create_patient()
     {
-        $card_number            = $this->input->post('card_number');
-        $nama_depan             = $this->input->post('nama_depan');
-        $nama_terakhir          = $this->input->post('nama_terakhir');
-        $card_type              = $this->input->post('card_type');
-        $email                  = $this->input->post('email');
-        $no_whatsapp            = $this->input->post('no_whatsapp');
-        $no_hp1                 = $this->input->post('no_hp1');
-        $no_hp2                 = $this->input->post('no_hp2');
-        $jk                     = $this->input->post('jk');
-        $agama                  = $this->input->post('agama');
-        $place_of_birth         = $this->input->post('place_of_birth');
-        $date_of_birth          = $this->input->post('date_of_birth');
-        $status_perkawinan      = $this->input->post('status_perkawinan');
-        $pendidikan             = $this->input->post('pendidikan');
-        $pekerjaan              = $this->input->post('pekerjaan');
-        $goldar                 = $this->input->post('goldar');
-        $provinsi               = $this->input->post('provinsi');
-        $kabupaten              = $this->input->post('kabupaten');
-        $kota                   = $this->input->post('kota');
-        $alamat                 = $this->input->post('alamat');
+        $card_number         = $this->input->post('card_number');
+        $nama_pasien         = $this->input->post('nama_pasien');
+        $card_type           = $this->input->post('card_type');
+        $email               = $this->input->post('email');
+        $no_whatsapp         = $this->input->post('no_whatsapp');
+        $no_hp1              = $this->input->post('no_hp1');
+        $no_hp2              = $this->input->post('no_hp2');
+        $jk                  = $this->input->post('jk');
+        $agama               = $this->input->post('agama');
+        $place_of_birth      = $this->input->post('place_of_birth');
+        $date_of_birth       = $this->input->post('date_of_birth');
+        $status_perkawinan   = $this->input->post('status_perkawinan');
+        $pendidikan          = $this->input->post('pendidikan');
+        $pekerjaan           = $this->input->post('pekerjaan');
+        $goldar              = $this->input->post('goldar');
+        $provinsi            = $this->input->post('provinsi');
+        $kabupaten           = $this->input->post('kabupaten');
+        $alamat              = $this->input->post('alamat');
+        $dokter              = $this->input->post('dokter');
+        $keluhan             = $this->input->post('keluhan');
 
-        $nama_pasien            = $nama_depan . ' ' . $nama_terakhir;
         $place_and_birth        = $place_of_birth . ',' . $date_of_birth;
 
         // Generate QR code file name first
@@ -132,8 +131,9 @@ class Pasien extends CI_Controller
             'goldar'                => $goldar,
             'provinsi'              => $provinsi,
             'kabupaten'             => $kabupaten,
-            'kota'                  => $kota,
             'alamat'                => $alamat,
+            'dokter'                => $dokter,
+            'keluhan'               => $keluhan,
             'barcode'               => $qr_code_path,
         );
 
@@ -143,10 +143,10 @@ class Pasien extends CI_Controller
         if ($result) {
             // QR code content including patient number
             $qr_content = "No. Pasien: {$result['patient_number']}\n";
-            $qr_content .= "NIK: $nik\n";
+            $qr_content .= "NIK: $card_number\n";
             $qr_content .= "Nama: $nama_pasien\n";
-            $qr_content .= "TTL: $tgl_control\n";
-            $qr_content .= "No. Telp: $no_telp";
+            $qr_content .= "Dokter: $no_telp";
+            $qr_content .= "Jenis Urusan: $no_telp";
 
             // Generate QR code
             \QRcode::png($qr_content, $qr_code_path, QR_ECLEVEL_L, 10);
@@ -166,8 +166,6 @@ class Pasien extends CI_Controller
     public function success()
     {
         $data['title'] = 'RSI Purwokerto';
-        $data['file_header'] = 3;
-        $data['file_footer'] = 2;
         // Get the stored patient data
         $data['patient_data'] = $this->session->flashdata('patient_data');
 
@@ -182,41 +180,52 @@ class Pasien extends CI_Controller
         $this->load->view('templates/footer', $data);
     }
 
-    public function test_pdf_generation()
+    public function success_checkup()
     {
-        // Sample patient data for testing
-        $test_data = array(
-            'patient_number' => '202402001',
-            'card_number' => '1234-5678-9012',
-            'nama_pasien' => 'John Doe',
-            'ttl' => 'New York, 1990-01-01',
-            'alamat' => '123 Test Street',
-            'no_whatsapp' => '08123456789',
-            'email' => 'john.doe@example.com',
-            'barcode' => 'assets/qrcodes/test_qr.png'
-        );
+        $data['title'] = 'RSI Purwokerto';
+        // Get the stored patient data
+        $data['patient_checkup'] = $this->session->flashdata('patient_checkup');
 
-        // Store test data in session
-        $this->session->set_flashdata('patient_data', $test_data);
-
-        // Try generating PDF
-        try {
-            $this->export_to_pdf();
-            echo "PDF generation successful";
-        } catch (Exception $e) {
-            echo "PDF generation failed: " . $e->getMessage();
-        }
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('pasien/success_checkup', $data);
+        $this->load->view('templates/footer', $data);
     }
 
-    public function email_pdf($patient_data)
+    public function email_pdf($patient_data = null)
     {
         // Load email library
         $this->load->library('email');
 
+        if ($patient_id === null) {
+            show_error('Patient ID is required');
+            return;
+        }
+
         // Generate PDF
-        $this->load->library('pdf');
         $pdf = new TCPDF();
-        // ... (previous PDF generation code) ...
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('RSI Purwokerto');
+        $pdf->SetTitle('Patient Registration Information');
+
+        // Add a page
+        $pdf->AddPage();
+
+        // Set font
+        $pdf->SetFont('helvetica', '', 12);
+
+        // Add content to PDF
+        $html = '
+        <h1>Registration Information</h1>
+        <p>Registration ID: ' . $patient_data['id_pasien'] . '</p>
+        <p>barcode ID: ' . $patient_data['barcode'] . '</p>
+        <p>Name: ' . $patient_data['name'] . '</p>
+        <p>Email: ' . $patient_data['email'] . '</p>
+        <p>Phone: ' . $patient_data['phone'] . '</p>
+        <p>Address: ' . $patient_data['address'] . '</p>
+        ';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
 
         // Save PDF to temporary file
         $temp_file = FCPATH . 'assets/temp/' . uniqid() . '.pdf';
@@ -228,12 +237,15 @@ class Pasien extends CI_Controller
         $config['smtp_user'] = 'your_smtp_user';
         $config['smtp_pass'] = 'your_smtp_password';
         $config['smtp_port'] = 587;
+        $config['smtp_crypto'] = 'tls';
         $config['mailtype'] = 'html';
+        $config['charset'] = 'utf-8';
+        $config['newline'] = "\r\n";
 
         $this->email->initialize($config);
 
         // Set email content
-        $this->email->from('hospital@example.com', 'RSI Purwokerto');
+        $this->email->from('shinomiya.tama@gmail.com', 'RSI Purwokerto');
         $this->email->to($patient_data['email']);
         $this->email->subject('Your Registration Information');
         $this->email->message('Please find your registration information attached.');
@@ -247,7 +259,6 @@ class Pasien extends CI_Controller
 
         return $sent;
     }
-    // In Pasien.php controller
 
     public function export_to_pdf()
     {
@@ -298,34 +309,64 @@ class Pasien extends CI_Controller
 
             // Add content (using the same HTML structure as before)
             $html = '
-        <h1 style="text-align: center;">Data Pasien Dibuat!</h1>
-        <div style="text-align: center;">
-            <h2>Nomor Urut Pasien:</h2>
-            <div style="font-size: 24px; font-weight: bold;">' . $patient_data['patient_number'] . '</div>
-        </div>
-        <div style="margin: 20px 0; padding: 10px; background-color: #f8f9fa;">
-            <p style="text-align: center; font-weight: bold;">SIMPAN NOMOR PASIEN UNTUK LOGIN</p>
-            <table cellpadding="5">
-                <tr>
-                    <td width="30%"><strong>Nomor Pasien:</strong></td>
-                    <td>' . $patient_data['patient_number'] . '</td>
-                </tr>
-                <tr>
-                    <td><strong>Nomor Identitas:</strong></td>
-                    <td>' . $patient_data['card_number'] . '</td>
-                </tr>
-                <tr>
-                    <td><strong>Nama:</strong></td>
-                    <td>' . $patient_data['nama_pasien'] . '</td>
-                </tr>
-                <tr>
-                    <td><strong>TTL:</strong></td>
-                    <td>' . $patient_data['ttl'] . '</td>
-                </tr>
-            </table>
-        </div>';
+            <h1 style="text-align: center;">Data Pasien Dibuat!</h1>
+            
+            <!-- QR Code Section -->
+            <div style="text-align: center; margin: 20px 0;">';
 
-            // Output the HTML content
+            // Add QR Code conditionally
+            if (isset($patient_data) && isset($patient_data['barcode']) && file_exists(FCPATH . $patient_data['barcode'])) {
+                $qr_path = FCPATH . $patient_data['barcode'];
+                $html .= '<img src="' . $qr_path . '" style="width: 200px;">';
+            } else {
+                $html .= '
+                <div style="padding: 10px; background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; border-radius: 5px;">
+                    QR Code not available';
+
+                if (!isset($patient_data)) {
+                    $html .= '<br>- patient_data not set';
+                }
+                if (!isset($patient_data['barcode'])) {
+                    $html .= '<br>- barcode not set';
+                }
+                if (isset($patient_data['barcode']) && !file_exists(FCPATH . $patient_data['barcode'])) {
+                    $html .= '<br>- file does not exist: ' . FCPATH . $patient_data['barcode'];
+                }
+
+                $html .= '</div>';
+            }
+
+            $html .= '
+            </div>
+        
+            <div style="text-align: center;">
+                <h2>Nomor Urut Pasien:</h2>
+                <div style="font-size: 24px; font-weight: bold;">' . $patient_data['patient_number'] . '</div>
+            </div>
+            
+            <div style="margin: 20px 0; padding: 10px; background-color: #f8f9fa;">
+                <p style="text-align: center; font-weight: bold;">SIMPAN NOMOR PASIEN UNTUK LOGIN</p>
+                <table cellpadding="5">
+                    <tr>
+                        <td width="30%"><strong>Nomor Pasien:</strong></td>
+                        <td>' . $patient_data['patient_number'] . '</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nomor Identitas:</strong></td>
+                        <td>' . $patient_data['card_number'] . '</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nama:</strong></td>
+                        <td>' . $patient_data['nama_pasien'] . '</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TTL:</strong></td>
+                        <td>' . $patient_data['ttl'] . '</td>
+                    </tr>
+                </table>
+            </div>';
+
+            // Add this right before using $html in the PDF generation
             $pdf->writeHTML($html, true, false, true, false, '');
 
             // Close and output PDF document

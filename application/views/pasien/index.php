@@ -1,15 +1,35 @@
-<h1 style="text-align: center; margin-top: 40px;">Pendaftaran Pasien</h1>
-<div class="container">
-    <div class="card">
-        <i class="fas fa-user"></i>
-        <h3>Daftar Kontrol</h3>
-        <p>Masuk untuk Daftar Check-up atau Kontrol penyakit.</p>
-        <a href="<?= base_url() ?>kontrol-pasien" class="button">Masuk</a>
-    </div>
-    <div class="card">
-        <i class="fas fa-user-plus"></i>
-        <h3>Pasien Baru</h3>
-        <p>Daftar sekarang untuk mendapatkan layanan medis.</p>
-        <a href="<?= base_url() ?>pasien-baru" class="button">Daftar</a>
+<div class="main-content">
+    <h1>Pendaftaran Online Rawat Jalan</h1>
+    <div class="container-a">
+        <h2>Alur Pendaftaran Online Pemeriksaan Rawat Jalan</h2>
+        <div class="process">
+            <div class="content">
+                <i class="fa-solid fa-address-card"></i>
+                <p>Pendaftar menyiapkan dokumen persyaratan.</p>
+            </div>
+            <?php $user = $this->session->userdata('server_rs');
+            if ($user == '') {
+                $active = 'disabled';
+            } else {
+                $active = '';
+            }
+            ?>
+            <div class="content">
+                <i class="fa-solid fa-user-clock"></i>
+                <p>Pendaftar mendaftar secara online dan mendapatkan nomor pendaftaran.</p>
+            </div>
+            <div class="content">
+                <i class="fa-solid fa-file-contract"></i>
+                <p>Pendaftar datang ke RSUD dengan membawa berkas.</p>
+            </div>
+            <div class="content">
+                <i class="fa-solid fa-stethoscope"></i>
+                <p>Pendaftar menuju klinik untuk pemeriksaan.</p>
+            </div>
+        </div>
+
+        <button class="button" onclick=" window.location.href='<?= base_url() ?>pasien-baru'" <?= $active ?>>
+            Pendaftaran Online
+        </button>
     </div>
 </div>

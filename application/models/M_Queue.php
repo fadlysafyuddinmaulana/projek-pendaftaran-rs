@@ -8,7 +8,7 @@ class M_Queue extends CI_Model
         $query = $this->db->query(
             "
             SELECT MAX(queue_number) as last_number 
-            FROM tb_queues_pasien 
+            FROM tb_r_queues 
             WHERE queue_date = ?",
             array($today)
         );
@@ -24,6 +24,7 @@ class M_Queue extends CI_Model
         return 'A' . str_pad($number, 3, '0', STR_PAD_LEFT);
     }
 
+
     public function add_to_queue($patient_id)
     {
         $queue_number = $this->generate_queue_number();
@@ -32,10 +33,11 @@ class M_Queue extends CI_Model
             'queue_number' => $queue_number,
             'patient_id' => $patient_id,
             'status' => 'waiting',
+            'queue_type' => 'registration',
             'queue_date' => date('Y-m-d')
         );
 
-        $this->db->insert('tb_queues_pasien', $data);
+        $this->db->insert('tb_r_queues', $data);
         return $queue_number;
     }
 
