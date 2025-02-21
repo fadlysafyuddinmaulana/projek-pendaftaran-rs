@@ -5,7 +5,7 @@
 -- Dumped from database version 17.2
 -- Dumped by pg_dump version 17.2
 
--- Started on 2025-02-21 14:18:15
+-- Started on 2025-02-21 17:23:11
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -472,16 +472,18 @@ ALTER TABLE ONLY public.tb_username ALTER COLUMN id_username SET DEFAULT nextval
 -- Data for Name: doctors; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.doctors VALUES (1, 'Dr. Budi Santoso', 'Kardiologi', 'Spesialis Jantung', '0812-3456-7890', 'open', 'Senin');
-INSERT INTO public.doctors VALUES (2, 'Dr. Siti Aisyah', 'Neurologi', 'Spesialis Saraf', '0813-4567-8901', 'close', 'Selasa');
-INSERT INTO public.doctors VALUES (3, 'Dr. Agus Prasetyo', 'Ortopedi', 'Spesialis Tulang', '0814-5678-9012', 'open', 'Rabu');
-INSERT INTO public.doctors VALUES (4, 'Dr. Rina Lestari', 'Dermatologi', 'Spesialis Kulit', '0815-6789-0123', 'close', 'Kamis');
-INSERT INTO public.doctors VALUES (5, 'Dr. Joko Widodo', 'Pediatri', 'Spesialis Anak', '0816-7890-1234', 'open', 'Jumat');
-INSERT INTO public.doctors VALUES (6, 'Dr. Dian Purnama', 'Onkologi', 'Spesialis Kanker', '0817-8901-2345', 'close', 'Sabtu');
-INSERT INTO public.doctors VALUES (7, 'Dr. Indah Permata', 'Oftalmologi', 'Spesialis Mata', '0818-9012-3456', 'open', 'Minggu');
-INSERT INTO public.doctors VALUES (8, 'Dr. Fajar Hidayat', 'Endokrinologi', 'Spesialis Diabetes', '0819-0123-4567', 'close', 'Senin');
-INSERT INTO public.doctors VALUES (9, 'Dr. Lina Kusuma', 'Ginekologi', 'Spesialis Kesehatan Wanita', '0821-1234-5678', 'open', 'Selasa');
-INSERT INTO public.doctors VALUES (10, 'Dr. Andi Wijaya', 'Psikiatri', 'Spesialis Kesehatan Mental', '0822-2345-6789', 'close', 'Rabu');
+COPY public.doctors (id, name, specialization, specialist_doctor, contact_number, status, name_day) FROM stdin;
+1	Dr. Budi Santoso	Kardiologi	Spesialis Jantung	0812-3456-7890	open	Senin
+2	Dr. Siti Aisyah	Neurologi	Spesialis Saraf	0813-4567-8901	close	Selasa
+3	Dr. Agus Prasetyo	Ortopedi	Spesialis Tulang	0814-5678-9012	open	Rabu
+4	Dr. Rina Lestari	Dermatologi	Spesialis Kulit	0815-6789-0123	close	Kamis
+5	Dr. Joko Widodo	Pediatri	Spesialis Anak	0816-7890-1234	open	Jumat
+6	Dr. Dian Purnama	Onkologi	Spesialis Kanker	0817-8901-2345	close	Sabtu
+7	Dr. Indah Permata	Oftalmologi	Spesialis Mata	0818-9012-3456	open	Minggu
+8	Dr. Fajar Hidayat	Endokrinologi	Spesialis Diabetes	0819-0123-4567	close	Senin
+9	Dr. Lina Kusuma	Ginekologi	Spesialis Kesehatan Wanita	0821-1234-5678	open	Selasa
+10	Dr. Andi Wijaya	Psikiatri	Spesialis Kesehatan Mental	0822-2345-6789	close	Rabu
+\.
 
 
 --
@@ -490,9 +492,11 @@ INSERT INTO public.doctors VALUES (10, 'Dr. Andi Wijaya', 'Psikiatri', 'Spesiali
 -- Data for Name: patient_documents; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.patient_documents VALUES (1, '202502150001', 'assets/patient_pdfs/patient_202502150001_2025-02-15.pdf', '2025-02-15 15:07:45');
-INSERT INTO public.patient_documents VALUES (2, '202502150001', 'assets/patient_pdfs/patient_202502150001_2025-02-15.pdf', '2025-02-15 15:07:45');
-INSERT INTO public.patient_documents VALUES (3, NULL, 'assets/patient_pdfs/patient__2025-02-17.pdf', '2025-02-17 13:54:49');
+COPY public.patient_documents (id, patient_number, file_path, created_at) FROM stdin;
+1	202502150001	assets/patient_pdfs/patient_202502150001_2025-02-15.pdf	2025-02-15 15:07:45
+2	202502150001	assets/patient_pdfs/patient_202502150001_2025-02-15.pdf	2025-02-15 15:07:45
+3	\N	assets/patient_pdfs/patient__2025-02-17.pdf	2025-02-17 13:54:49
+\.
 
 
 --
@@ -501,7 +505,9 @@ INSERT INTO public.patient_documents VALUES (3, NULL, 'assets/patient_pdfs/patie
 -- Data for Name: tb_c_queues; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.tb_c_queues VALUES (5, 'A001', 5, 'waiting', 'checkup', '2025-02-17', '2025-02-17 20:27:24.400402', NULL, NULL);
+COPY public.tb_c_queues (id_queue, queue_number, patient_id, status, queue_type, queue_date, created_at, called_at, completed_at) FROM stdin;
+5	A001	5	waiting	checkup	2025-02-17	2025-02-17 20:27:24.400402	\N	\N
+\.
 
 
 --
@@ -510,7 +516,9 @@ INSERT INTO public.tb_c_queues VALUES (5, 'A001', 5, 'waiting', 'checkup', '2025
 -- Data for Name: tb_kontrol; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.tb_kontrol VALUES (5, '202502170001', NULL, 'fadly safyuddin maulana', '085326762048', 'Laki-Laki', 'fadly.m73@gmail.com', 'Dr. Andi Saputra', 'Pemalang', '2001-10-30', '2025-02-17', 'assets/qrcodes/qr_kontrol/202502170001_qr.png', '2025-02-17 20:27:24.400402');
+COPY public.tb_kontrol (id_kontrol, patient_number, checkup_id, nama_pasien, no_whatsapp, jk, email, dokter, place_of_birth, date_of_birth, tgl_kontrol, barcode, created_at) FROM stdin;
+5	202502170001	\N	fadly safyuddin maulana	085326762048	Laki-Laki	fadly.m73@gmail.com	Dr. Andi Saputra	Pemalang	2001-10-30	2025-02-17	assets/qrcodes/qr_kontrol/202502170001_qr.png	2025-02-17 20:27:24.400402
+\.
 
 
 --
@@ -519,8 +527,10 @@ INSERT INTO public.tb_kontrol VALUES (5, '202502170001', NULL, 'fadly safyuddin 
 -- Data for Name: tb_pasien; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.tb_pasien VALUES (7, '202502170001', '3327083010010022', 'fadly safyuddin maulana', 'KTP', 'fadly.m73@gmail.com', '85326762048', '085326762048', '', 'Laki-Laki', 'Islam', 'Pemalang,2001-10-30', 'Menikah', 'SMP', 'Pegawai Swasta', 'A', 'aceh', 'aceh_besar', '789 Pine Ave', 'Dr. Citra Lestari', 'test', 'assets/qrcodes/3327083010010022_qr.png', '2025-02-17 19:58:14.513714');
-INSERT INTO public.tb_pasien VALUES (9, '202502190001', '3327083010010023', 'fadly', 'KTP', 'fadly.maulana35@yahoo.com', '85326762048', '085326762048', '', 'Laki-Laki', 'Islam', 'Pemalang,2001-02-10', 'Belum Menikah', 'S1', 'Pegawai Swasta', 'A', 'aceh', 'aceh_barat', 'test', 'Dr. Budi Santoso', 'sakit dok', 'assets/qrcodes/3327083010010023_qr.png', '2025-02-19 13:06:27.255883');
+COPY public.tb_pasien (id_pasien, patient_number, card_number, nama_pasien, card_type, email, no_whatsapp, no_hp1, no_hp2, jk, agama, ttl, status_perkawinan, pendidikan, pekerjaan, goldar, provinsi, kabupaten, alamat, dokter, keluhan, barcode, created_at) FROM stdin;
+7	202502170001	3327083010010022	fadly safyuddin maulana	KTP	fadly.m73@gmail.com	85326762048	085326762048		Laki-Laki	Islam	Pemalang,2001-10-30	Menikah	SMP	Pegawai Swasta	A	aceh	aceh_besar	789 Pine Ave	Dr. Citra Lestari	test	assets/qrcodes/3327083010010022_qr.png	2025-02-17 19:58:14.513714
+9	202502190001	3327083010010023	fadly	KTP	fadly.maulana35@yahoo.com	85326762048	085326762048		Laki-Laki	Islam	Pemalang,2001-02-10	Belum Menikah	S1	Pegawai Swasta	A	aceh	aceh_barat	test	Dr. Budi Santoso	sakit dok	assets/qrcodes/3327083010010023_qr.png	2025-02-19 13:06:27.255883
+\.
 
 
 --
@@ -529,8 +539,10 @@ INSERT INTO public.tb_pasien VALUES (9, '202502190001', '3327083010010023', 'fad
 -- Data for Name: tb_r_queues; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.tb_r_queues VALUES (2, 'A001', 7, 'waiting', 'registration', '2025-02-17', '2025-02-17 19:58:14.513714', NULL, NULL);
-INSERT INTO public.tb_r_queues VALUES (3, 'A001', 9, 'waiting', 'registration', '2025-02-19', '2025-02-19 13:06:27.255883', NULL, NULL);
+COPY public.tb_r_queues (id_queue, queue_number, patient_id, status, queue_type, queue_date, created_at, called_at, completed_at) FROM stdin;
+2	A001	7	waiting	registration	2025-02-17	2025-02-17 19:58:14.513714	\N	\N
+3	A001	9	waiting	registration	2025-02-19	2025-02-19 13:06:27.255883	\N	\N
+\.
 
 
 --
@@ -539,8 +551,10 @@ INSERT INTO public.tb_r_queues VALUES (3, 'A001', 9, 'waiting', 'registration', 
 -- Data for Name: tb_username; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.tb_username VALUES (1, '3327083010010022', 'fadly safyuddin maulana', '085326762048', 'Laki-Laki', 'fadly.m73@gmail.com', 'Pemalang', '2001-10-30', 'fadly231', '1b8b0bb7ecfbbea49ee6349747cf06a2', NULL);
-INSERT INTO public.tb_username VALUES (2, '3327083010010023', 'fadly', '085326762048', 'Laki-Laki', 'fadly.maulana35@yahoo.com', 'Pemalang', '2001-02-10', 'admin', '21232f297a57a5a743894a0e4a801fc3', NULL);
+COPY public.tb_username (id_username, card_number, nama_pasien, no_whatsapp, jk, email, place_of_birth, date_of_birth, username, password, completed_at) FROM stdin;
+1	3327083010010022	fadly safyuddin maulana	085326762048	Laki-Laki	fadly.m73@gmail.com	Pemalang	2001-10-30	fadly231	1b8b0bb7ecfbbea49ee6349747cf06a2	\N
+2	3327083010010023	fadly	085326762048	Laki-Laki	fadly.maulana35@yahoo.com	Pemalang	2001-02-10	admin	21232f297a57a5a743894a0e4a801fc3	\N
+\.
 
 
 --
@@ -740,7 +754,7 @@ ALTER TABLE ONLY public.tb_r_queues
     ADD CONSTRAINT tb_r_queues_patient_id_fkey FOREIGN KEY (patient_id) REFERENCES public.tb_pasien(id_pasien);
 
 
--- Completed on 2025-02-21 14:18:15
+-- Completed on 2025-02-21 17:23:11
 
 --
 -- PostgreSQL database dump complete
